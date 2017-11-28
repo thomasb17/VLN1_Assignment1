@@ -19,22 +19,18 @@ int main() {
             fout.close();
         } else if(input == 'r') {
             fin.open("superheroes.txt");
-            vector<Superhero> heroes;
-            string str;
-            string name;
-            int age;
-            char power;
-            while (!fin.eof()) {
-                fin >> name >> age >> power;
-                Superhero hero(name, age, power);
-                heroes.push_back(hero);
-                if(!fin.good()) {
-                    break;
+            if(fin.is_open()) {
+                vector<Superhero> heroes;
+                Superhero hero;
+                while (fin >> hero) {
+                    heroes.push_back(hero);
                 }
-            }
-            fin.close();
-            for (int i = 0; i < heroes.size(); ++i) {
-                heroes[i].display();
+                fin.close();
+                for (int i = 0; i < heroes.size(); ++i) {
+                    cout << heroes[i];
+                }
+            } else {
+                cout << "Unable to read from file, make sure to make some superheroes first" << endl;
             }
         }
     } while(input != 'q');
