@@ -16,41 +16,46 @@ Superhero::Superhero(string name, int age, char power) {
     this->power = power;
 }
 
-Superhero::display() const {
-    cout << this->name << " (" << this->age << "): ";
-    switch(this->power) {
-        case 'f':
-            cout << "Flying";
-            break;
-        case 'g':
-            cout << "Giant";
-            break;
-        case 'h':
-            cout << "Hacker";
-            break;
-        case 'n':
-            cout << "None";
-            break;
-        default:
-            cout << "Weakling";
-            break;
-    }
-    cout << endl;
-}
-
 ostream& operator << (ostream& out, const Superhero& hero) {
     out << hero.name << " ";
-    out << hero.age << " ";
-    out << hero.power << endl;
-    return out;
+    if(&out == &cout) {
+        out << "(" << hero.age << ") ";
+        switch(hero.power) {
+            case 'f':
+                out << "Flying";
+                break;
+            case 'g':
+                out << "Giant";
+                break;
+            case 'h':
+                out << "Hacker";
+                break;
+            case 'n':
+                out << "None";
+                break;
+            default:
+                out << "Weakling";
+                break;
+        }
+    } else {
+        out << hero.age << " ";
+        out << hero.power;
+    }
+    return out << endl;
 }
 
 istream& operator >> (istream& in, Superhero& hero) {
-    cout << "Input a name: ";
+    if(&in == &cin) {
+        cout << "Input a name: ";
+    }
     in >> hero.name;
-    cout << "Input the age: ";
+    if(&in == &cin) {
+        cout << "Input the age: ";
+    }
     in >> hero.age;
-    cout << "Input the power(single char): ";
+    if(&in == &cin) {
+        cout << "Input the power(single char): ";
+    }
     in >> hero.power;
     return in;
 }
