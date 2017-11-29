@@ -10,6 +10,7 @@ int main() {
         cout << "Write a Superhero to a file: w" << endl;
         cout << "Read Superheroes from a file: r" << endl;
         cout << "Quit: q" << endl;
+        cout << "Input: ";
         cin >> input;
         if(input == 'w') {
             Superhero newhero;

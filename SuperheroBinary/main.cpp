@@ -9,8 +9,9 @@ int main() {
         cout << "Write Superheroes to a file: w" << endl;
         cout << "Read Superheroes from a file: r" << endl;
         cout << "Quit: q" << endl;
+        cout << "Input: ";
         cin >> input;
-        if(input == 'w') {
+        if(tolower(input) == 'w') {
             int n;
             cout << "How many superheroes: ";
             cin >> n;
@@ -19,11 +20,11 @@ int main() {
                 cout << "Superhero number " << i + 1 << endl;
                 cin >> newheroes[i];
             }
-            fout.open("superheroes.dat", ios::binary);
+            fout.open("superheroes.dat", ios::binary | ios::app);
             fout.write((char*)(newheroes), sizeof(Superhero) * n);
             fout.close();
             delete[] newheroes;
-        } else if(input == 'r') {
+        } else if(tolower(input) == 'r') {
             cout << "List of superheroes on file" << endl;
             fin.open("superheroes.dat", ios::binary);
             fin.seekg(0, fin.end);
@@ -36,9 +37,11 @@ int main() {
                 cout << heroes[i];
             }
             delete[] heroes;
+        }else if(tolower(input) == 'q') {
+            break;
         } else {
             cout << "Unable to read from file, make sure to make some superheroes first" << endl;
         }
-    } while(input != 'q');
+    } while(true);
     return 0;
 }
