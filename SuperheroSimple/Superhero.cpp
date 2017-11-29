@@ -19,7 +19,7 @@ Superhero::Superhero(string name, int age, char power) {
 ostream& operator << (ostream& out, const Superhero& hero) {
     out << hero.name << " ";
     if(&out == &cout) {
-        out << "(" << hero.age << ") ";
+        out << "(" << hero.age << "): ";
         switch(hero.power) {
             case 'f':
                 out << "Flying";
